@@ -21,9 +21,9 @@ public interface WebConfig extends Config {
     @DefaultValue("89")
     String getBrowserVersion( );
 
-  /*  @Key("baseUrl")
+    @Key("base.url")
     @DefaultValue("https://demoqa.com/automation-practice-form")
-    String getBaseUrl( );*/
+    String getBaseUrl( );
 
     @Key("remote.driver")
     String getRemoteDriver( );

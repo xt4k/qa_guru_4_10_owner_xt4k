@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.Properties;
-
 import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
@@ -18,7 +16,7 @@ import static java.lang.System.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BaseTest {
-    public static String basePageUrl="https://demoqa.com/automation-practice-form";
+    public static String basePageUrl;//="https://demoqa.com/automation-practice-form";
 
     @BeforeAll
     static void setup( ) {
@@ -28,7 +26,7 @@ public class BaseTest {
         browser = config.getBrowser();
         browserVersion=config.getBrowserVersion();
         startMaximized = true;
-        //basePageUrl = config.getBaseUrl();
+        basePageUrl = config.getBaseUrl();
 
             DesiredCapabilities capabilities = new DesiredCapabilities( );
             capabilities.setCapability("enableVNC", config.isEnableVnc());
