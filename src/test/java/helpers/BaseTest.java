@@ -1,8 +1,10 @@
 package helpers;
 
 import com.codeborne.selenide.Configuration;
+import config.WebConfig;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -11,43 +13,37 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Configuration.startMaximized;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
-import static java.lang.System.getProperty;
-import static java.lang.System.setProperty;
+import static java.lang.System.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BaseTest {
-    protected static String basePageUrl = "https://demoqa.com/automation-practice-form";
+    public static String basePageUrl="https://demoqa.com/automation-practice-form";
 
     @BeforeAll
     static void setup( ) {
         addListener("AllureSelenide", new AllureSelenide( ).screenshots(true).savePageSource(true));
-        Configuration.browser = getProperty("browser", "chrome");
+
+        final WebConfig config = ConfigFactory.create(WebConfig.class, getProperties());
+        browser = config.getBrowser();
+        browserVersion=config.getBrowserVersion();
         startMaximized = true;
-        if (System.getProperty("remote_driver") != null) {
+        basePageUrl = config.getBaseUrl();
+
+        if (config.getRemoteDriver() != null) {
             // config for Java + Selenide
             DesiredCapabilities capabilities = new DesiredCapabilities( );
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
-            Configuration.browserCapabilities = capabilities;
-            Configuration.remote = System.getProperty("remote_driver");
-
-            Properties properties = new Properties( );
-            try {
-                properties.load(new FileReader("src/test/resources/properties/common.properties"));
-            } catch (IOException e) {
-                e.printStackTrace( );
-            }
-            setProps(properties);
+            capabilities.setCapability("enableVNC", config.isEnableVnc());
+            capabilities.setCapability("enableVideo", config.isEnableVideo());
+            browserCapabilities = capabilities;
+            remote = config.getRemoteDriver();
         }
     }
 
-    private static void setProps(Properties properties) {
-        properties.forEach((key, value) -> setProperty((String) key, (String) value));
-    }
 
 
     @Step("Here will be in purpose failed test.")
@@ -60,7 +56,7 @@ public class BaseTest {
         attachScreenshot("Last screenshot");
         attachPageSource( );
         attachAsText("Browser console logs", getConsoleLogs( ));
-        if (System.getProperty("video_storage") != null)
+        if (getProperty("video_storage") != null)
             attachVideo( );
         closeWebDriver( );
     }
