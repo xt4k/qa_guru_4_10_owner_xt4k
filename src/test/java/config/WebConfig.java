@@ -6,12 +6,12 @@ import org.aeonbits.owner.Config;
 public interface WebConfig extends Config {
 
     @Key("enable.vnc")
-    @DefaultValue("true")
-    boolean isEnableVnc();
+    @DefaultValue("false")
+    boolean isEnableVnc( );
 
     @Key("enable.video")
-    @DefaultValue("true")
-    boolean isEnableVideo();
+    @DefaultValue("false")
+    boolean isEnableVideo( );
 
     @Key("browser")
     @DefaultValue("chrome")
@@ -21,12 +21,10 @@ public interface WebConfig extends Config {
     @DefaultValue("89")
     String getBrowserVersion( );
 
-    @Key("baseUrl")
+  /*  @Key("baseUrl")
     @DefaultValue("https://demoqa.com/automation-practice-form")
-    String getBaseUrl( );
+    String getBaseUrl( );*/
 
     @Key("remote.driver")
-   String getRemoteDriver();
-
-
+    String getRemoteDriver( );
 }

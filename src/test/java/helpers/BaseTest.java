@@ -1,6 +1,5 @@
 package helpers;
 
-import com.codeborne.selenide.Configuration;
 import config.WebConfig;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -9,12 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Configuration.*;
-import static com.codeborne.selenide.Configuration.startMaximized;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
@@ -32,16 +28,16 @@ public class BaseTest {
         browser = config.getBrowser();
         browserVersion=config.getBrowserVersion();
         startMaximized = true;
-        basePageUrl = config.getBaseUrl();
+        //basePageUrl = config.getBaseUrl();
 
-        if (config.getRemoteDriver() != null) {
-            // config for Java + Selenide
             DesiredCapabilities capabilities = new DesiredCapabilities( );
             capabilities.setCapability("enableVNC", config.isEnableVnc());
             capabilities.setCapability("enableVideo", config.isEnableVideo());
             browserCapabilities = capabilities;
             remote = config.getRemoteDriver();
-        }
+
+             getProperties().forEach((key, value) -> out.println("key: "+ key+ "value "+ value));
+
     }
 
 
