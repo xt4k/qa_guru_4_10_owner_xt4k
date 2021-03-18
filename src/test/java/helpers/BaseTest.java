@@ -28,7 +28,7 @@ public class BaseTest {
         browser = config.getBrowser( );
         browserVersion = config.getBrowserVersion( );
         startMaximized = true;
-        config.getBaseUrl( );
+        baseUrl=config.getBaseUrl( );
 
         if (getProperty("remote.driver") != null || getProperty("env") != null) {
             DesiredCapabilities capabilities = new DesiredCapabilities( );
