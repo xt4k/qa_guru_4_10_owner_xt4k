@@ -16,28 +16,24 @@ import static java.lang.System.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BaseTest {
-    public static String basePageUrl;//="https://demoqa.com/automation-practice-form";
+    //public static final String basePageUrl="https://demoqa.com/automation-practice-form";
 
     @BeforeAll
     static void setup( ) {
         addListener("AllureSelenide", new AllureSelenide( ).screenshots(true).savePageSource(true));
 
-        final WebConfig config = ConfigFactory.create(WebConfig.class, getProperties());
-        browser = config.getBrowser();
-        browserVersion=config.getBrowserVersion();
+        final WebConfig config = ConfigFactory.create(WebConfig.class, getProperties( ));
+        browser = config.getBrowser( );
+        browserVersion = config.getBrowserVersion( );
         startMaximized = true;
-        basePageUrl = config.getBaseUrl();
+         config.getBaseUrl( );
 
-            DesiredCapabilities capabilities = new DesiredCapabilities( );
-            capabilities.setCapability("enableVNC", config.isEnableVnc());
-            capabilities.setCapability("enableVideo", config.isEnableVideo());
-            browserCapabilities = capabilities;
-            remote = config.getRemoteDriver();
-
-             getProperties().forEach((key, value) -> out.println("key: "+ key+ "value "+ value));
-
+        DesiredCapabilities capabilities = new DesiredCapabilities( );
+        capabilities.setCapability("enableVNC", config.isEnableVnc( ));
+        capabilities.setCapability("enableVideo", config.isEnableVideo( ));
+        browserCapabilities = capabilities;
+        remote = config.getRemoteDriver( );
     }
-
 
 
     @Step("Here will be in purpose failed test.")
