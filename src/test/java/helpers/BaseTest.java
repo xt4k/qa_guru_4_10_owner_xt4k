@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
+import static io.qameta.allure.Allure.step;
 import static java.lang.System.*;
 import static java.lang.System.getProperties;
 import static java.lang.System.getProperty;
@@ -30,13 +31,17 @@ public class BaseTest {
         startMaximized = true;
         baseUrl=config.getBaseUrl( );
 
-        if (getProperty("remote.driver") != null || getProperty("env") != null) {
+
+       // if (getProperty("remote.driver") != null || getProperty("env") != null) {
             DesiredCapabilities capabilities = new DesiredCapabilities( );
             capabilities.setCapability("enableVNC", config.isEnableVnc( ));
             capabilities.setCapability("enableVideo", config.isEnableVideo( ));
             browserCapabilities = capabilities;
             remote = config.getRemoteDriver( );
-        }
+        step("remote:"+remote);
+        step("browser:"+browser);
+        step("browserVersion:"+browserVersion);
+       // }
     }
 
 

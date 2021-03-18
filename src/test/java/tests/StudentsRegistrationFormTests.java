@@ -111,7 +111,7 @@ public class StudentsRegistrationFormTests extends BaseTest {
     @Test
     @Tag("failed")
     @Severity(BLOCKER)
-    @DisplayName("Test 07:Second failed test.")
+    @DisplayName("Test 08:Second failed test.")
     public void test08studentRegForm( ) {
         test = new StudentRegistrationScenario( );
         test.failedTest( );
