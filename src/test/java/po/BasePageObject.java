@@ -6,7 +6,6 @@ import pojo.Student;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static io.qameta.allure.Allure.step;
 import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
 import static org.openqa.selenium.Keys.*;
@@ -15,7 +14,6 @@ public class BasePageObject {
 
     @Step("Open `Student registration form` page")
     public BasePageObject openForm(String url) {
-        step("url:"+url);
         open(url);
         return this;
     }

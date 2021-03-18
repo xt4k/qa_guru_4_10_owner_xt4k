@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
 import static java.lang.System.*;
+import static java.lang.System.getProperties;
+import static java.lang.System.getProperty;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BaseTest {
@@ -26,13 +28,15 @@ public class BaseTest {
         browser = config.getBrowser( );
         browserVersion = config.getBrowserVersion( );
         startMaximized = true;
-         config.getBaseUrl( );
+        config.getBaseUrl( );
 
-        DesiredCapabilities capabilities = new DesiredCapabilities( );
-        capabilities.setCapability("enableVNC", config.isEnableVnc( ));
-        capabilities.setCapability("enableVideo", config.isEnableVideo( ));
-        browserCapabilities = capabilities;
-        remote = config.getRemoteDriver( );
+        if (getProperty("remote.driver") != null || getProperty("env") != null) {
+            DesiredCapabilities capabilities = new DesiredCapabilities( );
+            capabilities.setCapability("enableVNC", config.isEnableVnc( ));
+            capabilities.setCapability("enableVideo", config.isEnableVideo( ));
+            browserCapabilities = capabilities;
+            remote = config.getRemoteDriver( );
+        }
     }
 
 
