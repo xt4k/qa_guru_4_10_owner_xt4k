@@ -6,6 +6,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Configuration.*;
@@ -13,13 +14,11 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
 import static io.qameta.allure.Allure.step;
-import static java.lang.System.*;
 import static java.lang.System.getProperties;
 import static java.lang.System.getProperty;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BaseTest {
-    //public static final String basePageUrl="https://demoqa.com/automation-practice-form";
 
     @BeforeAll
     static void setup( ) {
@@ -29,19 +28,15 @@ public class BaseTest {
         browser = config.getBrowser( );
         browserVersion = config.getBrowserVersion( );
         startMaximized = true;
-        baseUrl=config.getBaseUrl( );
-
-
-       // if (getProperty("remote.driver") != null || getProperty("env") != null) {
-            DesiredCapabilities capabilities = new DesiredCapabilities( );
-            capabilities.setCapability("enableVNC", config.isEnableVnc( ));
-            capabilities.setCapability("enableVideo", config.isEnableVideo( ));
-            browserCapabilities = capabilities;
-            remote = config.getRemoteDriver( );
-        step("remote:"+remote);
-        step("browser:"+browser);
-        step("browserVersion:"+browserVersion);
-       // }
+        baseUrl = config.getBaseUrl( );
+        DesiredCapabilities capabilities = new DesiredCapabilities( );
+        capabilities.setCapability("enableVNC", config.isEnableVnc( ));
+        capabilities.setCapability("enableVideo", config.isEnableVideo( ));
+        browserCapabilities = capabilities;
+        remote = config.getRemoteDriver( );
+       /* step("remote:" + remote);
+        step("browser:" + browser);
+        step("browserVersion:" + browserVersion);*/
     }
 
 
