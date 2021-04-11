@@ -8,12 +8,12 @@ import po.BasePageObject;
 import pojo.Student;
 
 public class StudentRegistrationScenario extends BaseTest {
+    final WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties( ));
     BasePageObject po = new BasePageObject( );
-    final WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties());
 
     @Step("Success student form register scenario")
     void successStudentRegisterScenario(Student student) {
-        po.openForm(config.getBaseUrl())
+        po.openForm(config.getBaseUrl( ))
                 .validateFormOpen( )
                 .fillRegForm(student)
                 .submitForm( );
@@ -22,7 +22,7 @@ public class StudentRegistrationScenario extends BaseTest {
 
     @Step("Success student form register scenario")
     void unSuccessStudentRegisterScenario(Student student, String field) {
-        po.openForm(config.getBaseUrl())
+        po.openForm(config.getBaseUrl( ))
                 .validateFormOpen( )
                 .fillRegForm(student)
                 .submitForm( );
@@ -32,7 +32,7 @@ public class StudentRegistrationScenario extends BaseTest {
 
     @Step("Failed scenario")
     public void failedTest( ) {
-        po.openForm(config.getBaseUrl())
+        po.openForm(config.getBaseUrl( ))
                 .validateFormOpen( )
                 .submitForm( );
         po.validateFormOpen( );

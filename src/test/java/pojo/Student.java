@@ -96,6 +96,10 @@ public class Student {
         return mobileNum;
     }
 
+    public void setMobileNum(String mob) {
+        mobileNum = mob;
+    }
+
     public LocalDate getBirthDate( ) {
         return birthDate;
     }
@@ -116,11 +120,17 @@ public class Student {
         return hobbies;
     }
 
+    public void setHobbies(int i) {
+        hobbies = i;
+    }
+
     public String getAddress( ) {
         return address;
     }
 
-    public File getIcon( ) { return icon; }
+    public File getIcon( ) {
+        return icon;
+    }
 
     public String getState( ) {
         return state;
@@ -153,13 +163,5 @@ public class Student {
                 ", city='" + city + '\'' +
                 ", genderName='" + genderName + '\'' +
                 '}';
-    }
-
-    public void setMobileNum(String mob) {
-        mobileNum=mob;
-    }
-
-    public void setHobbies(int i) {
-        hobbies=i;
     }
 }
