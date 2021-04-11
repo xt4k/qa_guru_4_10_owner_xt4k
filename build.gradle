@@ -18,7 +18,7 @@ def allureVersion = "2.13.8",
     slf4jVersion = "1.7.29",
     javaFakerVersion = "1.0.2",
     ownerVersion = "1.0.12",
-    aspectjVersion = ">1.9.6"
+    aspectjVersion = "1.9.6"
 
 compileTestJava {
     options.encoding = 'UTF-8'
